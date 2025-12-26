@@ -1,0 +1,74 @@
+{
+    "meta": {
+        "name": "Standard Cabinet",
+        "version": "1.0",
+        "description": "標準矩形櫃體，包含背板視覺詐欺 (Visual Fraud)。"
+    },
+    "default_params": {
+        "W": 600,
+        "D": 580,
+        "H": 2000,
+        "T": 18,
+        "BackT": 8,
+        "GrooveD": 8,
+        "ToeH": 100
+    },
+    "parts": [
+        {
+            "name": "Side_Left",
+            "role": "Body",
+            "grain": "vertical",
+            "width": "T",
+            "depth": "D",
+            "height": "H",
+            "pos_x": "0",
+            "pos_y": "0",
+            "pos_z": "0"
+        },
+        {
+            "name": "Side_Right",
+            "role": "Body",
+            "grain": "vertical",
+            "width": "T",
+            "depth": "D",
+            "height": "H",
+            "pos_x": "W - T",
+            "pos_y": "0",
+            "pos_z": "0"
+        },
+        {
+            "name": "Top_Panel",
+            "role": "Body",
+            "grain": "horizontal",
+            "width": "W - 2*T",
+            "depth": "D",
+            "height": "T",
+            "pos_x": "T",
+            "pos_y": "0",
+            "pos_z": "H - T"
+        },
+        {
+            "name": "Bottom_Panel",
+            "role": "Body",
+            "grain": "horizontal",
+            "width": "W - 2*T",
+            "depth": "D",
+            "height": "T",
+            "pos_x": "T",
+            "pos_y": "0",
+            "pos_z": "ToeH"
+        },
+        {
+            "name": "Back_Panel",
+            "role": "Back",
+            "grain": "vertical",
+            "description": "Visual Fraud: Overlaps sides by GrooveD",
+            "width": "(W - 2*T) + (GrooveD * 2)",
+            "depth": "BackT",
+            "height": "(H - T - ToeH) + (GrooveD * 2)",
+            "pos_x": "T - GrooveD",
+            "pos_y": "D - BackT - 20",
+            "pos_z": "ToeH - GrooveD"
+        }
+    ]
+}
