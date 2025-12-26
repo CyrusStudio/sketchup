@@ -20,10 +20,10 @@
   - [x] 實作 `derived_params` 支援 <!-- id: 6 -->
   - [x] 實作五金數量公式 (Depth > 600 ? 6 : 4)
 
-- [/] **第五階段：互動配置體驗 (UX & Placement)** (優先級：高)
-  - [ ] 實作 `PlacementTool` <!-- id: 9 -->
-  - [ ] 實作「幽靈預覽 (Ghost)」功能 <!-- id: 10 -->
-  - [ ] 實作「智慧吸附 (Smart Snapping)」(牆面/鄰居) <!-- id: 11 -->
+- [x] **第五階段：互動配置體驗 (UX & Placement)** (優先級：高)
+  - [x] 實作 `PlacementTool` <!-- id: 9 -->
+  - [x] 實作「幽靈預覽 (Ghost)」功能 <!-- id: 10 -->
+  - [x] 實作「智慧吸附 (Smart Snapping)」(牆面/鄰居) <!-- id: 11 -->
 
-- [ ] **第六階段：報價與數據 (Quotation)** (優先級：低)
-  - [ ] 實作屬性寫入 (AttributeDictionary) <!-- id: 12 -->
+- [x] **第六階段：報價與數據 (Quotation)** (優先級：低)
+  - [x] 實作屬性寫入 (AttributeDictionary) <!-- id: 12 -->
