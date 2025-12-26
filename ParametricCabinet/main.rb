@@ -14,8 +14,26 @@ module ParametricCabinet
     sub_menu.add_item('Generate Standard Cabinet') do
       generate_standard_cabinet
     end
+    
+    sub_menu.add_item('Interactive Place Tool') do
+      activate_place_tool
+    end
 
     file_loaded(__FILE__)
+  end
+
+  def self.activate_place_tool
+    require_relative 'core/placement_tool'
+    model = Sketchup.active_model
+    
+    # Load defaults
+    schema_path = File.join(File.dirname(__FILE__), 'resources', 'schemas', 'standard_cabinet.json')
+    engine = Core::CabinetEngine.new(schema_path)
+    # Default params
+    params = { 'W' => 600, 'D' => 580, 'H' => 2000 }
+    
+    tool = Core::PlacementTool.new(engine, params)
+    model.select_tool(tool)
   end
 
   def self.generate_standard_cabinet

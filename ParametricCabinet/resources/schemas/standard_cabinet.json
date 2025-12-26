@@ -13,6 +13,9 @@
         "GrooveD": 8,
         "ToeH": 100
     },
+    "derived_params": {
+        "HardwareCount": "D > 600 ? 6 : 4"
+    },
     "parts": [
         {
             "name": "Side_Left",
@@ -68,7 +71,10 @@
             "height": "(H - T - ToeH) + (GrooveD * 2)",
             "pos_x": "T - GrooveD",
             "pos_y": "D - BackT - 20",
-            "pos_z": "ToeH - GrooveD"
+            "pos_z": "ToeH - GrooveD",
+            "attributes": {
+                "HardwareQty": "HardwareCount"
+            }
         }
     ]
 }

@@ -35,7 +35,12 @@ module ParametricCabinet
       end
 
       def calculate_parts(user_params = {})
-        params = merged_params(user_params)
+        # 1. Merge basic params
+        base_params = merged_params(user_params)
+        
+        # 2. Resolve derived parameters (e.g. HardwareCount = D > 600 ? 6 : 4)
+        full_params = resolve_derived_params(base_params)
+
         parts_def = @schema['parts']
         
         calculated_parts = []
@@ -43,17 +48,47 @@ module ParametricCabinet
         parts_def.each do |part_def|
           part_data = part_def.clone
           
-          # 計算尺寸與位置
+          # Calculate dimensions and position
           ['width', 'depth', 'height', 'pos_x', 'pos_y', 'pos_z'].each do |key|
             formula = part_def[key].to_s
-            val = evaluate_formula(formula, params)
+            val = evaluate_formula(formula, full_params)
             part_data[key] = val
+          end
+
+          # Also evaluate custom attributes if they exist
+          if part_def['attributes']
+            part_data['attributes'] = {}
+            part_def['attributes'].each do |k, v|
+              part_data['attributes'][k] = evaluate_formula(v.to_s, full_params)
+            end
           end
 
           calculated_parts << part_data
         end
 
         calculated_parts
+      end
+
+      # Expose full params resolution for external use
+      def resolve_full_params(user_params = {})
+        base = merged_params(user_params)
+        resolve_derived_params(base)
+      end
+
+      private
+
+      def resolve_derived_params(base_params)
+        derived_defs = @schema['derived_params'] || {}
+        final_params = base_params.clone
+
+        # Iterate simple hash. 
+        # Note: If derived params depend on OTHER derived params, we need topological sort or multi-pass.
+        # For MVP, we assume derived params only depend on base_params.
+        derived_defs.each do |key, formula|
+          val = evaluate_formula(formula, base_params)
+          final_params[key] = val
+        end
+        final_params
       end
 
       private
